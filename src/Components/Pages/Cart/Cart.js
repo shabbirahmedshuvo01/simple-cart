@@ -24,6 +24,35 @@ const Cart = () => {
 
         console.log(name, email, userId, price, PackageWork, description);
 
+        const bookingDetails = {
+            name: name,
+            email: email,
+            userNID: userId,
+            bAmount: price,
+            package: PackageWork,
+            description: description
+        }
+
+        console.log(bookingDetails);
+
+        fetch('https://simple-cart-server.onrender.com/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingDetails)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    window.alert('Booking submited')
+                }
+                else {
+                    window.alert('Something Wrong')
+                }
+            })
+
 
     };
 
@@ -38,7 +67,7 @@ const Cart = () => {
 
 
             <section className='p-5'>
-                <h4 className='p-5'>Book Your Special Residential</h4>
+                <h4 className='p-5 text-info'>Book Your Special Residential</h4>
 
                 <div className='pb-5 px-5'>
                     <div class="input-group mb-3">
